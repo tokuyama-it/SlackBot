@@ -120,4 +120,3 @@ module.exports = (robot) ->
   new cronJob('0 0 10 * * 6',()->AC.ContestNotification("AtCoder Grand Contest 047","21:00~22:50(110分)","1200~","https://atcoder.jp/contests/agc047")).start()
 
   #--------------------カスタマイズ--------------------
-  new cronJob('0 40 22 * * 3', () ->send '@URR4ZUUM8', "testです").start()
