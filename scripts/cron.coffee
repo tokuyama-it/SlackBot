@@ -25,7 +25,7 @@ module.exports = (robot) ->
   Sc=new School()
   AC=new AtCoder()
 #--------------------毎日SHR-----------------
-  new cronJob('0 35 8 * * 1-5', () ->Sc.FiveMin("SHR")).start()
+#  new cronJob('0 35 8 * * 1-5', () ->Sc.FiveMin("SHR")).start()
 
 #--------------------月曜--------------------
 #  new cronJob('0 45 8 * * 1', () ->send '@URR4ZUUM8', "5分後に「プログラミング基礎」です。").start()
@@ -64,15 +64,15 @@ module.exports = (robot) ->
 #  new cronJob('0 45 12 * * 3', () ->Sc.FiveMin("数学II A")).start()
 
 #--------------------木曜--------------------
-  new cronJob('0 45 8 * * 4', () ->Sc.FiveMin("化学I")).start()
-
-  new cronJob('0 25 10 * * 4', () ->Sc.FiveMin("芸術科目")).start()
-
-  new cronJob('0 45 12 * * 4', () ->send '@URR4ZUUM8', "5分後に「数学II B」です。").start()
-  
-  new cronJob('0 45 12 * * 4', () ->Sc.FiveMin("電気回路")).start()
-
-  new cronJob('0 25 14 * * 4', () ->Sc.FiveMin("HR")).start()
+#  new cronJob('0 45 8 * * 4', () ->Sc.FiveMin("化学I")).start()
+#
+#  new cronJob('0 25 10 * * 4', () ->Sc.FiveMin("芸術科目")).start()
+#
+#  new cronJob('0 45 12 * * 4', () ->send '@URR4ZUUM8', "5分後に「数学II B」です。").start()
+#  
+#  new cronJob('0 45 12 * * 4', () ->Sc.FiveMin("電気回路")).start()
+#
+#  new cronJob('0 25 14 * * 4', () ->Sc.FiveMin("HR")).start()
 
 #--------------------金曜--------------------
 #  new cronJob('0 45 8 * * 5', () ->send '@URR4ZUUM8', "5分後に「基礎設計製図II」です。").start()
@@ -86,7 +86,7 @@ module.exports = (robot) ->
 #--------------------授業終了アナウンス--------------------
 #  new cronJob('0 0 16 * * 1', () ->Sc.Finished()).start()
 
-  new cronJob('0 20 15 * * 4', () ->send '#general', "@everyone\n前期の授業がすべて終了しました！\n明日から夏休みです！😎").start()
+#  new cronJob('0 20 15 * * 4', () ->send '#general', "@everyone\n前期の授業がすべて終了しました！\n明日から夏休みです！😎").start()
 
 #  new cronJob('0 20 14 * * 2,3', () ->Sc.Finished()).start()
 
@@ -106,10 +106,10 @@ module.exports = (robot) ->
 #    send '@URR4ZUUM8', "今日のME2の授業予定は\n\n1:国語総合II\n2：数学IIA\n3：倫理"
 #  ).start()
   
-  new cronJob('0 0 8 * * 4', () ->
-    send '#general', "今日のIE2の授業予定は\n\n1：化学I\n2：芸術科目\n3：電気回路\n4：HR"
-    send '@URR4ZUUM8', "今日のME2の授業予定は\n\n1：化学I\n2：芸術科目\n3：数学II B\n4：HR"
-  ).start()    
+#  new cronJob('0 0 8 * * 4', () ->
+#    send '#general', "今日のIE2の授業予定は\n\n1：化学I\n2：芸術科目\n3：電気回路\n4：HR"
+#    send '@URR4ZUUM8', "今日のME2の授業予定は\n\n1：化学I\n2：芸術科目\n3：数学II B\n4：HR"
+#  ).start()    
   
 #  new cronJob('0 0 8 * * 3', () ->
 #    send '#general', "今日のIE2の授業予定は\n\n1：コンピュータ工学\n2：総合英語IW\n3：数学IIA"
@@ -117,6 +117,7 @@ module.exports = (robot) ->
 #  ).start()
 
   #--------------------AtCoder-----------------------
-  new cronJob('0 0 10 * * 6',()->AC.ContestNotification("AtCoder Grand Contest 047","21:00~22:50(110分)","1200~","https://atcoder.jp/contests/agc047")).start()
+
+  new cronJob('0 0 10 15 8 *',()->AC.ContestNotification("AtCoder Beginner Contest 175","21:00~22:40(100分)","~1999","https://atcoder.jp/contests/abc175")).start()
 
   #--------------------カスタマイズ--------------------
