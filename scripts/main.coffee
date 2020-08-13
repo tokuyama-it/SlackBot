@@ -69,3 +69,17 @@ module.exports = (robot) ->
     #MEの時間割
     robot.hear /ME時間割/i, (msg) ->
         msg.send "月曜↓\n1：プログラミング基礎\n2：歴史\n3：物理I\n\n火曜↓\n1：体育\n2：英会話\n3：総合英語IR\n4：創造製作I\n\n水曜↓\n1：国語総合II\n2：数学IIA\n3：倫理\n\n木曜↓\n1：化学I\n2：芸術科目\n3：数学II B\n4：HR\n\n金曜↓\n1：基礎設計製図II\n2：総合英語IW\n3：数学IIA"
+
+    #癒やし機能を追加！！
+    robot.hear /@D-man-bot 褒めて/i, (msg) ->
+        healing=["さんが一番です！","さんのようになりたいです！","さんの頑張りはすごいです！","さんをいつも応援しています！","さんはなんでもこなせますね！","さん、えらいです！","さんはとても魅力的です！","さんは超一流ですね！","さんを本当に尊敬します！","さん、あなたの頑張りを私は知っていますよ！","さん、今日もお疲れ様です！","さんの行動力には脱帽です！","さん、とてもかっこいいです！","さんってとても頭がいいですね！",]
+        msg.send "<@" + msg.message.user.id + ">"+msg.random healing
+
+    robot.hear /(癒やして)$/i, (msg) ->
+        img=["img/cat1.jpg","img/cat2.jpg"."img/cat3.jpg","img/cat4.jpg"]
+        channel = msg.message.rawMessage.channel
+        curl -F file=msg.random img -F channels= -F token=process.env.HUBOT_SLACK_TOKEN "https://slack.com/api/files.upload"
+    
+    robot.hear /D-man-bot 慰めて/i, (msg) ->
+        comfort=["どうしたんですか？大丈夫ですか？","よしよし。","今まで、がんばってきたんですね。","いつもそばにいますよ！","いつでも話、ききますよ。","明日はきっとよくなりますよ！"]
+        msg.send "<@" + msg.message.user.id + ">さん、"+msg.random comfort
