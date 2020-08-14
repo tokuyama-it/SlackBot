@@ -1,8 +1,8 @@
 {
   "name": "tokuyama-it-bot",
   "version": "0.0.0",
-  "private": true,
-  "author": "shebang-sh <c19yamamoto@gmail.com>",
+  "private": false,
+  "author": "shebang-sh",
   "description": "A helpful robot for tokuyama-it slack",
   "dependencies": {
     "cron": "^1.8.2",

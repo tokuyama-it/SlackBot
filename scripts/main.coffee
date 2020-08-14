@@ -78,6 +78,9 @@ module.exports = (robot) ->
     robot.hear /癒やして/i, (msg) ->
         msg.send "にゃーん\n"+CatImg()
 
+    robot.hear /癒して/i, (msg) ->
+        msg.send "にゃーん\n"+CatImg()
+
 CatImg = (height, width)->
   height = height ||  Math.floor(Math.random()*250) + 250
   width = width  || Math.floor(Math.random()*250) + 250
