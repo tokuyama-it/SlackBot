@@ -1,6 +1,6 @@
 {
   "name": "tokuyama-it-bot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "author": "shebang-sh",
   "description": "A helpful robot for tokuyama-it slack",
