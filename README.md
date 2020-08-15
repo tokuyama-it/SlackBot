@@ -3,6 +3,13 @@
 弊会Slackで運用しているbotのソースコードです。<br>
 GitHub社のオープンソースであるhubotを使っています。
 
+## Install
+以下を実行して下さい。
+`npm i tokuyama-it-bot`
+
+## Develop
+プルリクエスト、Issueお待ちしております！
+
 ## License
 ### MIT License
 Copyright (c) 2020 shebang<br>
