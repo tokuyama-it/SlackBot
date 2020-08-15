@@ -4,7 +4,7 @@
 GitHub社のオープンソースであるhubotを使っています。
 
 ## Install
-以下を実行して下さい。
+以下を実行して下さい。<br>
 `npm i tokuyama-it-bot`
 
 ## Develop
