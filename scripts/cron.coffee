@@ -118,6 +118,6 @@ module.exports = (robot) ->
 
   #--------------------AtCoder-----------------------
 
-  new cronJob('0 0 10 15 8 *',()->AC.ContestNotification("AtCoder Beginner Contest 175","21:00~22:40(100分)","~1999","https://atcoder.jp/contests/abc175")).start()
+  new cronJob('0 0 10 * * 6',()->AC.ContestNotification("AtCoder Beginner Contest 176","21:00~22:40(100分)","~1999","https://atcoder.jp/contests/abc176")).start()
 
   #--------------------カスタマイズ--------------------
