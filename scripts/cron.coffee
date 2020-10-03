@@ -113,3 +113,7 @@ new cronJob('0 0 8 * * 3', () ->
 #new cronJob('0 0 10 * * 6',()->AC.ContestNotification("AtCoder Beginner Contest 176","21:00~22:40(100分)","~1999","https://atcoder.jp/contests/abc176")).start()
 
   #--------------------カスタマイズ--------------------
+
+new cronJob('0 20 12 * * *', () ->
+  send '#general', "【テスト配信】\n今日のIE2の授業予定は\n\n1：コンピュータ工学\n2：総合英語IW\n3：数学IIA"
+).start()
