@@ -12,7 +12,7 @@ GitHub社のオープンソースであるhubotを使っています。
 
 ## License
 ### MIT License
-Copyright (c) 2020 shebang<br>
+Copyright (c) 2020-2021 tokuyama-it<br>
 See the [LICENSE](https://github.com/tokuyama-it/SlackBot/blob/master/LICENSE) file for license rights and limitations (MIT).
 
 ### Using Hubot(Under MIT License)
