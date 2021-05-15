@@ -61,7 +61,7 @@ module.exports = (robot) ->
     send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[3][0]+"\n2："+ME3[3][1]+"\n3："+ME3[3][2]+"\n4："+ME3[3][3]
   ).start()    
 
-  new cronJob('0 30 12 * * *', () ->
+  new cronJob('0 0 7 * * 5', () ->
     send '@URR4ZUUM8', "今日のIE3の授業予定は\n\n1："+IE3[4][0]+"\n2："+IE3[4][1]+"\n3："+IE3[4][2]
     send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[4][0]+"\n2："+ME3[4][1]+"\n3："+ME3[4][2]
   ).start()
@@ -69,6 +69,6 @@ module.exports = (robot) ->
 #--------------------AtCoder-----------------------
   AC=new AtCoder()
 
-  new cronJob('0 0 10 * * 6',()->AC.ContestNotification("マイナビプログラミングコンテスト2021AtCoder Beginner Contest 201","21:00~22:40(100分)","~1999","https://atcoder.jp/contests/abc201")).start()
+  new cronJob('0 0 10 16 5 0',()->AC.ContestNotification("AtCoder Regular Contest 119","21:00~23:00(120分)","~2799",,"https://atcoder.jp/contests/arc119")).start()
 
 #--------------------カスタマイズ--------------------
