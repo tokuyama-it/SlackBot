@@ -69,11 +69,11 @@ module.exports = (robot) ->
 #--------------------AtCoder-----------------------
   AC=new AtCoder()
 
-  new cronJob('0 0 11 16 5 *',()->AC.ContestNotification("AtCoder Regular Contest 119","21:00~23:00(120分)","~2799","https://atcoder.jp/contests/arc119")).start()
-  new cronJob('0 0 10 22 5 6',()->AC.ContestNotification("AtCoder Heuristic Contest 003","2021-05-22(土) 12:00 ~ 2021-05-30(日) 20:00","-","https://atcoder.jp/contests/ahc003")).start()
-  new cronJob('0 0 10 22 5 6',()->AC.ContestNotification("エイシングプログラミングコンテスト2021（AtCoder Beginner Contest 202）","2021-05-22(土) 21:00 ~ 2021-05-22(土) 22:40 (100分)","~ 1999","https://atcoder.jp/contests/abc202")).start()
-  new cronJob('0 0 10 23 5 0',()->AC.ContestNotification("AtCoder Regular Contest 120","2021-05-23(日) 22:00 ~ 2021-05-24(月) 00:00 (120分)","~ 2799","https://atcoder.jp/contests/arc120")).start()
-  new cronJob('0 0 10 29 5 6',()->AC.ContestNotification("NOMURA プログラミングコンテスト 2021(AtCoder Regular Contest 121)","2021-05-29(土) 21:00 ~ 2021-05-29(土) 23:00 (120分)","~ 2799","https://atcoder.jp/contests/arc121")).start()
-  new cronJob('0 0 10 30 5 0',()->AC.ContestNotification("AtCoder Beginner Contest 203（Sponsored by Panasonic）","2021-05-30(日) 21:00 ~ 2021-05-30(日) 22:40 (100分)","~ 1999","https://atcoder.jp/contests/abc203")).start()
+  new cronJob('0 0 12 16 May 0',()->AC.ContestNotification("AtCoder Regular Contest 119","21:00~23:00(120分)","~2799","https://atcoder.jp/contests/arc119")).start()
+  new cronJob('0 0 10 22 May 6',()->AC.ContestNotification("AtCoder Heuristic Contest 003","2021-05-22(土) 12:00 ~ 2021-05-30(日) 20:00","-","https://atcoder.jp/contests/ahc003")).start()
+  new cronJob('0 0 10 22 May 6',()->AC.ContestNotification("エイシングプログラミングコンテスト2021（AtCoder Beginner Contest 202）","2021-05-22(土) 21:00 ~ 2021-05-22(土) 22:40 (100分)","~ 1999","https://atcoder.jp/contests/abc202")).start()
+  new cronJob('0 0 10 23 May 0',()->AC.ContestNotification("AtCoder Regular Contest 120","2021-05-23(日) 22:00 ~ 2021-05-24(月) 00:00 (120分)","~ 2799","https://atcoder.jp/contests/arc120")).start()
+  new cronJob('0 0 10 29 May 6',()->AC.ContestNotification("NOMURA プログラミングコンテスト 2021(AtCoder Regular Contest 121)","2021-05-29(土) 21:00 ~ 2021-05-29(土) 23:00 (120分)","~ 2799","https://atcoder.jp/contests/arc121")).start()
+  new cronJob('0 0 10 30 May 0',()->AC.ContestNotification("AtCoder Beginner Contest 203（Sponsored by Panasonic）","2021-05-30(日) 21:00 ~ 2021-05-30(日) 22:40 (100分)","~ 1999","https://atcoder.jp/contests/abc203")).start()
 
 #--------------------カスタマイズ--------------------
