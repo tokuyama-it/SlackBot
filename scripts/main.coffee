@@ -1,5 +1,5 @@
 module.exports = (robot) ->
-
+    Day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
     IE3=[
       ['国語総合II','物理II','数学IIIA']
       ['アルゴリズムとデータ構造','体育','数学IIIB']
@@ -80,15 +80,15 @@ module.exports = (robot) ->
     #IEの時間割
     robot.hear /時間割/i, (msg) ->
         Jikan=""
-        for i in IE3
-            Jikan+=i+"\n"
+        for i in IE3.length
+            Jikan+=Day[i+1]+IE3[i]+"\n"
         msg.send Jikan
 
     #MEの時間割
     robot.hear /ME時間割/i, (msg) ->
         Jikan=""
-        for i in ME3
-            Jikan+=i+"\n"
+        for i in ME3.length
+            Jikan+=Day[i+1]+ME3[i]+"\n"
         msg.send Jikan
 
 
