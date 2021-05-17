@@ -7,6 +7,7 @@
   "dependencies": {
     "cron": "^1.8.2",
     "hubot": "^3.3.2",
+    "hubot-conversation": "^1.1.1",
     "hubot-diagnostics": "^1.0.0",
     "hubot-google-images": "^0.2.7",
     "hubot-google-translate": "^0.2.1",
@@ -24,7 +25,6 @@
     "node": "~10"
   },
   "main": "scripts/main.coffee",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

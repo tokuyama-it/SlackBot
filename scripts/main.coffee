@@ -1,19 +1,32 @@
+#対話用モジュール
+Conversation = require('hubot-conversation');
+#曜日
+Day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+#時間割
+IE3=[
+  ['国語総合II','物理II','数学IIIA']
+  ['アルゴリズムとデータ構造','体育','数学IIIB']
+  ['コンピュータシステム概論','情報数学','電子工学実験']
+  ['哲学','アナログ回路','確率','HR']
+  ['計測工学','総合英語IIR','ディジタル回路']
+]
+ME3=[
+  ['物理II','哲学','数学IIIB']
+  ['プログラミング応用','体育','総合英語IIR']
+  ['設計製図I','国語総合II','機構学','コンピュータ制御']
+  ['創造演習II','数学IIIA','工業力学','HR']
+  ['電子回路I','アクチュエータ','材料学I']
+]
+CA3=[
+    ['建築計画I','数学IIIA','物理II']
+    ['情報処理','体育','測量実習']
+    ['CAD基礎','総合英語IIR','数学IIIB']
+    ['構造力学基礎','水力学基礎','哲学','HR']
+    ['国語総合II','工学デザイン基礎III','地盤工学基礎']
+]
+
 module.exports = (robot) ->
-    Day=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-    IE3=[
-      ['国語総合II','物理II','数学IIIA']
-      ['アルゴリズムとデータ構造','体育','数学IIIB']
-      ['コンピュータシステム概論','情報数学','電子工学実験']
-      ['哲学','アナログ回路','確率','HR']
-      ['計測工学','総合英語IIR','ディジタル回路']
-    ]
-    ME3=[
-      ['物理II','哲学','数学IIIB']
-      ['プログラミング応用','体育','総合英語IIR']
-      ['設計製図I','国語総合II','機構学','コンピュータ制御']
-      ['創造演習II','数学IIIA','工業力学','HR']
-      ['電子回路I','アクチュエータ','材料学I']
-    ]
+    conversation = new Conversation(robot)
 
     #おみくじ機能    
     robot.hear /おみくじ/i, (msg) ->
@@ -77,28 +90,53 @@ module.exports = (robot) ->
         else
             msg.send rate + "(赤)です！"
 
-    #IEの時間割
-    robot.hear /時間割/i, (msg) ->
-        Jikan=""
-        for i in IE3.length
-            Jikan+=Day[i+1]+IE3[i]+"\n"
-        msg.send Jikan
-
-    #MEの時間割
-    robot.hear /ME時間割/i, (msg) ->
-        Jikan=""
-        for i in ME3.length
-            Jikan+=Day[i+1]+ME3[i]+"\n"
-        msg.send Jikan
-
 
     robot.hear /癒して/i, (msg) ->
         msg.send "にゃーん\n"+CatImg()
 
 
+    #時間割
+    robot.hear /時間割/i, (msg) ->
+        #対話形式の有効時間
+        dialog = conversation.startDialog msg, 60000; # timeout = 1min
+        dialog.timeout = (msg) ->
+            msg.emote('タイムアウトです')
+
+        input_dep msg,dialog
+
+
+#関数
+
+#猫の画像をwebから取得
 CatImg = (height, width)->
   height = height ||  Math.floor(Math.random()*250) + 250
   width = width  || Math.floor(Math.random()*250) + 250
   root = "http://placekitten.com"
   root += "/g" if Math.random() > 0.5
   return "#{root}/#{height}/#{width}#.png"
+
+#時間割の学科判定
+input_dep=(msg,dialog) ->
+    msg.send('学科を入力してください!!\n[IE,ME,CA]')
+    dialog.addChoice /(.+)/, (msg2) ->
+        #返信された部分を取り出す
+        dep=msg2.match[1].trim().split(" ")[1]
+        
+        Jikanwari=""
+        if (dep=='IE')
+            for i in [0..IE3.length-1]
+                Jikanwari+=Day[i+1]+"："+IE3[i]+"\n"
+            msg.send Jikanwari
+        
+        else if (dep=='ME')
+            for i in [0..ME3.length-1]
+                Jikanwari+=Day[i+1]+"："+ME3[i]+"\n"
+            msg.send Jikanwari
+        
+        else if (dep=='CA')
+            for i in [0..CA3.length-1]
+                Jikanwari+=Day[i+1]+"："+CA3[i]+"\n"
+            msg.send Jikanwari
+        
+        else
+            msg.send('選択肢にマッチしませんでした。最初からやり直してください。')

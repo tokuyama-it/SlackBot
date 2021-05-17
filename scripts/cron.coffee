@@ -1,4 +1,26 @@
 cronJob = require('cron').CronJob
+#時間割
+IE3=[
+  ['国語総合II','物理II','数学IIIA']
+  ['アルゴリズムとデータ構造','体育','数学IIIB']
+  ['コンピュータシステム概論','情報数学','電子工学実験']
+  ['哲学','アナログ回路','確率','HR']
+  ['計測工学','総合英語IIR','ディジタル回路']
+]
+ME3=[
+  ['物理II','哲学','数学IIIB']
+  ['プログラミング応用','体育','総合英語IIR']
+  ['設計製図I','国語総合II','機構学','コンピュータ制御']
+  ['創造演習II','数学IIIA','工業力学','HR']
+  ['電子回路I','アクチュエータ','材料学I']
+]
+CA3=[
+    ['建築計画I','数学IIIA','物理II']
+    ['情報処理','体育','測量実習']
+    ['CAD基礎','総合英語IIR','数学IIIB']
+    ['構造力学基礎','水力学基礎','哲学','HR']
+    ['国語総合II','工学デザイン基礎III','地盤工学基礎']
+]
 
 module.exports = (robot) ->
   send = (channel, msg) ->
@@ -7,13 +29,30 @@ module.exports = (robot) ->
 #--------------------クラス定義---------------- 
   #学校関連
   class School
-    #5分前を知らせるメソッド
+    #5分前
     FiveMin:(subject)->
       send '#general', "@everyone 5分後に"+subject+"です。"
 
-    #授業終了を知らせるメソッド
+    #授業終了
     Finished:->
       send '#general', "@everyone\n本日の授業はすべて終了しました。\nお疲れ様でした。"
+
+    #時間割
+    Jikanwari:(Day)->
+      new cronJob('0 0 7 * * '+Day, () ->
+        #配列用にデクリメント
+        Day--
+
+        text_ME="今日のME3の授業予定は\n\n"
+        for i in [0..ME3[Day].length-1]
+          text_ME+=i+1+"："+ME3[Day][i]+"\n"
+        send '@URR4ZUUM8', text_ME
+
+        text_IE="今日のIE3の授業予定は\n\n"
+        for i in [0..IE3[Day].length-1]
+          text_IE+=i+1+"："+IE3[Day][i]+"\n"
+        send '#general', text_IE
+      ).start()
 
   #AtCoder関連
   class AtCoder
@@ -25,46 +64,14 @@ module.exports = (robot) ->
 
   Sc=new School()
 
-#--------------------授業予定--------------------
-  IE3=[
-    ['国語総合II','物理II','数学IIIA']
-    ['アルゴリズムとデータ構造','体育','数学IIIB']
-    ['コンピュータシステム概論','情報数学','電子工学実験']
-    ['哲学','アナログ回路','確率','HR']
-    ['計測工学','総合英語IIR','ディジタル回路']
-  ]
-  ME3=[
-    ['物理II','哲学','数学IIIB']
-    ['プログラミング応用','体育','総合英語IIR']
-    ['設計製図I','国語総合II','機構学','コンピュータ制御']
-    ['創造演習II','数学IIIA','工業力学','HR']
-    ['電子回路I','アクチュエータ','材料学I']
-  ]
-  
-  new cronJob('0 0 7 * * 1', () ->
-    send '#general', "今日のIE3の授業予定は\n\n1："+IE3[0][0]+"\n2："+IE3[0][1]+"\n3："+IE3[0][2]
-    send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[0][0]+"\n2："+ME3[0][1]+"\n3："+ME3[0][2]
-  ).start()
-
-  new cronJob('0 0 7 * * 2', () ->
-    send '#general', "今日のIE3の授業予定は\n\n1："+IE3[1][0]+"\n2："+IE3[1][1]+"\n3："+IE3[1][2]
-    send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[1][0]+"\n2："+ME3[1][1]+"\n3："+ME3[1][2]
-  ).start()
-
-  new cronJob('0 0 7 * * 3', () ->
-    send '#general', "今日のIE3の授業予定は\n\n1："+IE3[2][0]+"\n2："+IE3[2][1]+"\n3,4："+IE3[2][2]
-    send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[2][0]+"\n2："+ME3[2][1]+"\n3："+ME3[2][2]+"\n4："+ME3[2][3]
-  ).start()
-
-  new cronJob('0 0 7 * * 4', () ->
-    send '#general', "今日のIE3の授業予定は\n\n1："+IE3[3][0]+"\n2："+IE3[3][1]+"\n3："+IE3[3][2]+"\n4："+IE3[3][3]
-    send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[3][0]+"\n2："+ME3[3][1]+"\n3："+ME3[3][2]+"\n4："+ME3[3][3]
-  ).start()    
-
-  new cronJob('0 0 7 * * 5', () ->
-    send '#general', "今日のIE3の授業予定は\n\n1："+IE3[4][0]+"\n2："+IE3[4][1]+"\n3："+IE3[4][2]
-    send '@URR4ZUUM8', "今日のME3の授業予定は\n\n1："+ME3[4][0]+"\n2："+ME3[4][1]+"\n3："+ME3[4][2]
-  ).start()
+#--------------------授業予定--------------------  
+  #時間割通知スケジュール
+  #1-5:月-金
+  Sc.Jikanwari(1)
+  Sc.Jikanwari(2)
+  Sc.Jikanwari(3)
+  Sc.Jikanwari(4)
+  Sc.Jikanwari(5)
 
 #--------------------AtCoder-----------------------
   AC=new AtCoder()
