@@ -1,4 +1,5 @@
 cronJob = require('cron').CronJob
+
 #時間割
 IE3=[
   ['国語総合II','物理II','数学IIIA']
@@ -22,9 +23,23 @@ CA3=[
     ['国語総合II','工学デザイン基礎III','地盤工学基礎']
 ]
 
+
 module.exports = (robot) ->
   send = (channel, msg) ->
     robot.send {room: channel}, msg
+
+  D = new Date
+
+#--------------------関数定義------------------
+  #天気予報
+  WeatherApiKey=process.env.WeatherAPI
+  searchWeather=()->
+    request=robot.http("http://api.openweathermap.org/data/2.5/weather?q=Tokuyama,jp&appid=#{WeatherApiKey}&units=metric").get()
+    stMessage = request (err,res,body) ->
+      json = JSON.parse body
+      weatherName = json['weather'][0]['main']
+      message="今日の天気は"+weatherName+"です！"
+      send '#general', message
 
 #--------------------クラス定義---------------- 
   #学校関連
@@ -38,21 +53,19 @@ module.exports = (robot) ->
       send '#general', "@everyone\n本日の授業はすべて終了しました。\nお疲れ様でした。"
 
     #時間割
-    Jikanwari:(Day)->
-      new cronJob('0 0 7 * * '+Day, () ->
-        #配列用にデクリメント
-        Day--
+    Jikanwari:->
+      #配列用に-1
+      Day=D.getDay()-1
 
-        text_ME="今日のME3の授業予定は\n\n"
-        for i in [0..ME3[Day].length-1]
-          text_ME+=i+1+"："+ME3[Day][i]+"\n"
-        send '@URR4ZUUM8', text_ME
+      text_ME="今日のME3の授業予定は\n\n"
+      for i in [0..ME3[Day].length-1]
+        text_ME+=i+1+"："+ME3[Day][i]+"\n"
+      send '@URR4ZUUM8', text_ME
 
-        text_IE="今日のIE3の授業予定は\n\n"
-        for i in [0..IE3[Day].length-1]
-          text_IE+=i+1+"："+IE3[Day][i]+"\n"
-        send '#general', text_IE
-      ).start()
+      text_IE="今日のIE3の授業予定は\n\n"
+      for i in [0..IE3[Day].length-1]
+        text_IE+=i+1+"："+IE3[Day][i]+"\n"
+      send '#general', text_IE
 
   #AtCoder関連
   class AtCoder
@@ -60,18 +73,13 @@ module.exports = (robot) ->
     ContestNotification :(name,time,rated,link) -> 
       send '#競プロ', "【お知らせ】\n本日は「"+name+"」が開催されます！\n開催時間:"+time+"\nRated対象:"+rated+"\n"+link
 
-#--------------------インスタンス化----------
-
+#--------------------スケジュール--------------------  
   Sc=new School()
 
-#--------------------授業予定--------------------  
-  #時間割通知スケジュール
-  #1-5:月-金
-  Sc.Jikanwari(1)
-  Sc.Jikanwari(2)
-  Sc.Jikanwari(3)
-  Sc.Jikanwari(4)
-  Sc.Jikanwari(5)
+  new cronJob('0 0 7 * * 1-5',()->
+    Sc.Jikanwari()
+    searchWeather()
+  ).start()
 
 #--------------------AtCoder-----------------------
   AC=new AtCoder()
