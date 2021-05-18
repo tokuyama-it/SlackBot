@@ -26,6 +26,9 @@ CA3=[
 ]
 
 module.exports = (robot) ->
+    send = (channel, msg) ->
+        robot.send {room: channel}, msg
+    
     conversation = new Conversation(robot)
 
     #おみくじ機能    
@@ -103,6 +106,16 @@ module.exports = (robot) ->
             msg.emote('タイムアウトです')
 
         input_dep msg,dialog
+
+    #天気予報
+    robot.hear /今日の天気$/, (msg)->
+        WeatherApiKey=process.env.WeatherAPI
+        request=robot.http("http://api.openweathermap.org/data/2.5/weather?q=Tokuyama,jp&appid=#{WeatherApiKey}&units=metric").get()
+        stMessage = request (err,res,body) ->
+            json = JSON.parse body
+            weatherName = json['weather'][0]['main']
+            message="今日の天気は"+weatherName+"です！"
+            msg.send message
 
 
 #関数
