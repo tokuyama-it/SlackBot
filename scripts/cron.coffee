@@ -92,3 +92,53 @@ module.exports = (robot) ->
   new cronJob('0 0 10 30 May 0',()->AC.ContestNotification("AtCoder Beginner Contest 203（Sponsored by Panasonic）","2021-05-30(日) 21:00 ~ 2021-05-30(日) 22:40 (100分)","~ 1999","https://atcoder.jp/contests/abc203")).start()
 
 #--------------------カスタマイズ--------------------
+  new cronJob('0 0 21 * * *',()->
+    Day=D.getDay()
+
+    if Day == 0
+      send '@URR4ZUUM8', "本日の英単語は1800-1900です。"
+
+    else if Day == 1
+      send '@URR4ZUUM8', "本日の英単語は1-300です。"
+
+    else if Day == 2
+      send '@URR4ZUUM8', "本日の英単語は300-600です。"
+
+    else if Day == 3
+      send '@URR4ZUUM8', "本日の英単語は600-900です。"
+
+    else if Day == 4
+      send '@URR4ZUUM8', "本日の英単語は900-1200です。"
+
+    else if Day == 5
+      send '@URR4ZUUM8', "本日の英単語は1200-1500です。"
+
+    else if Day == 6
+      send '@URR4ZUUM8', "本日の英単語は1500-1800です。"
+  ).start()
+
+new cronJob('0 0 7 * * *',()->
+    Day=D.getDay()
+
+    if Day == 1
+      send '@URR4ZUUM8', "本日の英単語は1800-1900です。"
+
+    else if Day == 2
+      send '@URR4ZUUM8', "本日の英単語は1-300です。"
+
+    else if Day == 3
+      send '@URR4ZUUM8', "本日の英単語は300-600です。"
+
+    else if Day == 4
+      send '@URR4ZUUM8', "本日の英単語は600-900です。"
+
+    else if Day == 5
+      send '@URR4ZUUM8', "本日の英単語は900-1200です。"
+
+    else if Day == 6
+      send '@URR4ZUUM8', "本日の英単語は1200-1500です。"
+
+    else if Day == 0
+      send '@URR4ZUUM8', "本日の英単語は1500-1800です。"
+      
+  ).start()
